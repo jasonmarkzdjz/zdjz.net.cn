@@ -1,0 +1,330 @@
+
+一、新增特性和改变
+1. 标量类型和返回类型声明（Scalar Type Declarations & Scalar Type Declarations）
+  PHP语言一个非常重要的特点就是“弱类型”
+  PHP开始以可选的方式支持类型定义。除此之外，还引入了一个开关指令 declare(strict_type=1);，
+  当这个指令一旦开启，将会强制当前文件下的程序遵循严格的函数传参类型和返回类型。
+  例如一个add函数加上类型定义，可以写成这样：
+function add(int $a,int $b){
+    return $a+$b;
+}
+declare(strict_types = 1);
+如果不开启strict_type，PHP将会尝试帮你转换成要求的类型，而开启之后，会改变PHP就不再做类型转换，
+类型不匹配就会抛出错误。对于喜欢“强类型”语言的同学来说，这是一大福音。
+
+HP7中更多的Error变为可捕获的Exception返回给开发者，如果不进行捕获则为Error，
+如果捕获就变 为一个可在程序内处理的Exception。
+这些可被捕获的Error通常都是不会对程序造成致命伤害的Error，例如函数不存。
+PHP7进一步方便开 发者处理，让开发者对程序的掌控能力更强。因为在默认情况下，Error会直接导致程序中断，
+而PHP7则提供捕获并且处理的能力，让程序继续执行下去， 为程序员提供更灵活的选择。
+例如，执行一个我们不确定是否存在的函数，PHP5兼容的做法是在函数被调用之前追加的判断function_exist，
+而PHP7则支持捕获Exception的处理方式。
+
+NULL 合并运算符
+  NULL 合并运算符使得变量存在且值不为NULL， 它就会返回自身的值，否则返回它的第二个操作数。
+
+实例如下：
+  如果 $_GET['user'] 不存在返回 'nobody'，否则返回 $_GET['user'] 的值
+  $username = $_GET['user'] ?? 'nobody';
+  类似的三元运算符
+  $username = isset($_GET['user']) ? $_GET['user'] : 'nobody';
+
+通过 define() 定义常量数组
+
+为unserialize()提供过滤
+
+ $email = 'dir/upload.image.jpg'."<br>";
+ $email = 'jasonmark@yeah.net';
+ echo strrpos($email,".")."<br>";strrpos 最后一次出现@的位置
+ echo substr($email, strrpos($email,".")+1)."<br>";
+ echo strstr($email, ".")."<br>";
+ stristr()：不区分大小写strstr() 函数搜索字符串在另一字符串中的第一次出现。返回剩余部分并返回字符串的剩余部分：如果设置为 "true"，它将返回 search 参数第一次出现之前的字符串部分。
+ strrchr() 函数查找字符串在另一个字符串中最后一次出现的位置，并返回从该位置到字符串结尾的所有字符。
+ echo substr(strrchr($email, "."),1)."<br>";搜索字符串在另一字符串中的最后一次出现，并返回此字符串的其余部分：如果设置为 "true"，它将返回 search 参数第一次出现之前的字符串部分。
+ echo substr(strchr($email,"."),1)."<br>";字符串第一次一次出现的位置
+ echo strrpos($email, "@")."<br>";
+ echo 'Testing ' . 1 + 2 . '45'."<br>";245
+ echo strrev($email);字符串翻转
+ 在PHP中error_reporting这个函数有什么作用?
+ 　　答:设置错误级别与错误信息回报
+ $alpha = 'abcdefghijklmnopqrstuvwxyz';
+ $letters = array(15, 7, 15);
+ foreach($letters as $val) {/* 这里应该加入什么 */
+     echo $alpha{$val}."<br>";
+ }
+
+ $x = 'apple';
+ echo substr_replace ($x, 'x', 1, 2)."<br>";
+ $array = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ $f = fopen ("myfile.txt", "r");
+ for ($i = 0; $i < 50; $i++) {
+     fwrite ($f, $array[rand(0, strlen ($array) - 1)])."<br>";
+ }
+
+ echo ucwords("hello world")."<br>";把每个单词的首字符转换为大写：
+ 字符串“open_door” 转换成 “OpenDoor”
+ $str = 'make_by_id';
+ $str = str_replace(' ','',ucwords(str_replace('_',' ',$str)));
+ echo $str."<br>";
+ 用PHP打印出前一天的时间格式是2006-5-10 22:21:21
+ echo date('Y-m-d H:i:s',strtotime('-1 days'))."<br>";
+
+语句include和require的区别是什么?为避免多次包含同一文件，可用(?)语句代替它们? (2分)
+  include是包含的意思，找不到文件时，会报warning的错误，然后程序继续往下执行
+  require是必须的意思，找不到文件时，会报fatal error （致命错误），程序停止往下执行
+  include_once()的作用和include()是几乎相同的
+   加once后，系统会进行判断，如果已经包含，则不会再包含第二次
+ 　而加不加once是效率上的区别，加上once，虽然系统帮你考虑了只加载一次，但系统的判断会是效率降低，
+
+有一个网页地址, 比如PHP开发资源网主页: http://www.phpres.com/index.html,如何得到它的内容
+  $str = fopen('http://www.phpres.com/index.html','rb');
+  $conetent = stream_get_contents($str);
+  fclose($str);
+  echo $conetent;
+
+file_get_contents('http://www.phpres.com/index.html');
+
+mysql_fetch_row() 和mysql_fetch_array之间有什么区别? (1分)
+  mysql_fetch_row是从结果集取出1行数组,作为枚举
+  mysql_fetch_array是从结果集取出一行数组作为关联数组,或数字数组,两者兼得
+  取得查询结果集总数的函数是?
+  mysql_num_rows($result);
+
+1.表单中 get与post提交方法的区别?
+    答:get是发送请求HTTP协议通过url参数传递进行接收,而post是实体数据,可以通过表单提交大量信息.
+2.session与cookie的区别?
+    答:session:储存用户访问的全局唯一变量,存储在服务器上的php指定的目录中的（session_dir）的位置进行的存放
+下面哪个函数可以打开一个文件，以对文件进行读和写操作?(1分)
+    (a) fget() (b) file_open() (c) fopen() (d) open_file()  [  c  ]
+
+echo(),print(),print_r()的区别?
+  答:echo是PHP语句, print和print_r是函数,语句没有返回值,函数可以有返回值(即便没有用)
+    print（）只能打印出简单类型变量的值(如int,string)
+    print_r（）可以打印出复杂类型变量的值(如数组,对象)
+    echo 输出一个或者多个字符串
+8、检测一个变量是否有设置的函数是?是否为空的函数是?
+    答:isset($str),empty($str);
+
+3、谈谈对mvc的认识?
+Controller实现业务逻辑 Model：对业务逻辑进行有关数据库的操作返回给控制器
+    控制器将业务逻辑处理好的数据返回给view 展示在页面上
+    答:由模型(Model),视图(View),控制器(Controller)完成的应用程序
+    由模型发出要实现的功能到控制器,控制器接收组织功能传递给视图;
+
+6、请写出数据类型(int char varchar datetime text)的意思; 请问varchar和char有什么别?
+    答:int是数字类型,char固定长度字符串,varchar实际长度字符串,datetime日期时间型,text文本字符串
+    char的场地固定为创建表设置的长度,varchar为可变长度的字符
+
+23、用PHP写出显示客户端IP与服务器IP的代码?
+    答:打印客户端IP:echo $_SERVER[‘REMOTE_ADDR’]; 或者: getenv('REMOTE_ADDR');getenv取得开发环境变量
+      打印服务器IP:echo gethostbyname("www.bolaiwu.com") gethostbyname取得IP地址函数
+29、foo()和@foo()之间有什么区别?
+    答:@foo()屏蔽错误的输出
+
+34、下面哪个函数可以打开一个文件，以对文件进行读和写操作?
+    (a) fget() (b) file_open() (c) fopen() (d) open_file()
+    答：c
+
+
+45、请写出PHP5权限控制修饰符(3分)
+  答:public(公共),private(私用),protected(继承)
+
+ $num = 10;
+ function multiply(){
+     $num = $num * 10;
+ }
+ multiply();
+ echo $num."<br>";10
+
+ $b=201;   $c=40;      $a=$b>$c?4:5;   echo $a."<br>";
+ 检测一个变量是否有设置的函数是否?是否为空的函数是?(2分)
+  答:isset($str),empty($str);
+ 取得查询结果集总数的函数是?(1分)答:
+  mysql_num_rows($num);
+ $arr = array('james', 'tom', 'symfony'); //请打印出第一个元素的值
+ echo $arr[0];
+ 请将41题的数组的值用','号分隔并合并成字串输出(1分)
+ echo implode(',',$arr)."<br>";
+ foreach($arr as $val){
+     echo $val.',';
+ }
+ echo "<br>";
+ $a = 'abcdef'; //请取出$a的值并打印出第一个字母(1分)
+ echo $a{0}."<br>";
+
+ $str = 'http://www.sina.com.cn/abc/de/fg.php?id=1';
+ $parr = parse_url($str);print_r($parr);
+ $path = $parr['path'];
+ echo $path = basename($parr['path'])."<br>";
+ echo substr($path,strrpos($path,'.')+1)."<br>";
+ echo strrchr($path,'.')."<br>";
+
+ $str1 = null;
+ $str2 = false;
+ echo $str1==$str2 ? '相等' : '不相等'."<br>";  //相等
+ $str3 = '';
+ $str4 = 0;
+ echo $str3==$str4 ? '相等' : '不相等'."<br>";//相等
+ $str5 = 0;
+ $str6 = '0';
+ echo $str5===$str6 ? '相等' : '不相等'."<br>";//不相等
+
+
+ $a1 = null;
+ $a2 = false;
+ $a3 = 0;
+ $a4 = '';
+ $a5 = '0';
+ $a6 = 'null';
+ $a7 = array();
+ $a8 = array(array());
+ echo empty($a1) ? 'true' : 'false'."<br>";//true
+ echo empty($a2) ? 'true' : 'false'."<br>";//true
+ echo empty($a3) ? 'true' : 'false'."<br>";//true
+ echo empty($a4) ? 'true' : 'false'."<br>";//true
+ echo empty($a5) ? 'true' : 'false'."<br>";//true
+ echo empty($a6) ? 'true' : 'false'."<br>";//false
+ echo empty($a7) ? 'true' : 'false'."<br>";//true
+ echo empty($a8) ? 'true' : 'false'."<br>";//false
+
+ $test = 'aaaaaa';
+ $abc = & $test;
+ unset($test);
+ echo $test."<br>";空值
+ echo $abc."<br>";aaaaa
+
+ $count = 5;
+ function get_count(){
+     static $count = 0;
+     return $count++;
+ }
+ echo $count."<br>";5
+ ++$count;
+ echo get_count()."<br>";0
+ echo get_count()."<br>";1
+
+ $GLOBALS['var1'] = 5;
+ $var2 = 1;
+ function get_value(){
+     global $var2;
+     $var1 = 0;
+     return $var2++;
+ }
+ get_value();
+ echo $var1."<br>";5
+ echo $var2."<br>";2
+
+ function get_arr($arr){
+     unset($arr[0]);
+ }
+ $arr1 = array(1, 2);
+ $arr2 = array(1, 2);
+ get_arr(&$arr1);
+ get_arr($arr2);
+ echo count($arr1)."<br>";//1
+ echo count($arr2)."<br>";//2
+$conn=mysql_connect($mysql_server_name, $mysql_username,$mysql_password);
+                        
+从表中提取信息的sql语句
+  $strsql="SELECT * FROM `gbook`";
+执行sql查询
+  $result=mysql_db_query($mysql_database, $strsql, $conn);
+获取查询结果
+  $row=mysql_fetch_row($result);
+
+Mysql中MyISAM引擎和InnoDB引擎的比较
+    MyISAM 和 InnoDB的区别
+    1)MyISAM类型不支持事务处理等高级处理，而InnoDB类型支持
+    2)mysiam表不支持外键
+    3)在执行数据库写入的操作（insert,update,delete）的时候，mysiam表会锁表，而innodb表会锁行
+
+fastCgi 是什么
+fastCgi 是用来提高 CGI 程序性能的。
+fastCgi 会先启一个 master，解析配置文件，初始化执行环境，
+然后再启动多个 worker。当请求过来时，master 会传递给一个 worker，
+然后立即可以接受下一个请求。这样就避免了重复的劳动，效率自然是高。
+而且当 worker 不够用时，master 可以根据配置预先启动几个 worker 等着；
+当然空闲 worker 太多时，也会停掉一些，这样就提高了性能，也节约了资源。
+这就是 fastCgi 对进程的管理。
+PHP-FPM 是一个实现了 FastCgi 的程序，被 PHP 官方收录。
+PHP 的解释器是 php-cgi，它只是个 CGI 程序，只能解析请求，返回结果，不会进程管理
+
+memcache是一个高效的 分布式的数据缓存系统 解决动态web频繁访问数据库对数据库造成的压力 产生的缓存系统
+memcached是以守护进程的方式运行在一个或多个服务器上
+memcache 的工作流程
+	首先会检查客户端的数据缓存是否存在缓存服务器memcached上  如有 则返回给客户端，否则 查询数据库 写入查询数据库数据到memcached中
+	当分配给缓存服务器memcached的内存用光了 之后。memcached会使用LRU算法策略加上到期失效策略 失效的数据首先被替换掉，然后在替换掉最近未使用的数据
+memcached是一种无阻塞的socket基于libevent的通信方式，由于无阻塞方式通信，所以对内存的读写速度非常之快
+
+addserver 将服务器列表添加到链接池中  链接池打开 脚本执行完毕之后自动关闭。网络链接只有有需要的时候才会建立。
+因为不会因为增加很多的服务器到链接池二增加系统的负担
+connect 打开memcached服务器链接，建立一个到memcached服务器的链接.
+
+Memcache这个软件项目一般叫Memcache，但项目的主程序文件叫memcached.exe，
+是靠服务端的这个守护进程管理这些HashTable。由于这个命名问题，所以很多人把这个软件系统叫memcache，
+想叫成memcached也没什么问题！
+memcached尽管是分布式缓存服务器。但服务器端没分布式功能。各个memcached不会互相通信以共享信息
+PHP有两个memcache客户端：php memcache和php memcached。
+memcache完全在PHP框架内开发的，提供了memcached的接口，
+memecached扩展是使用了libmemcached库提供的api与memcached服务端进行交互。
+memcache提供了面向过程及面向对象的接口，memached只支持面向对象的接口。
+memcached 实现了更多的 memcached 协议。  memcached 支持 Binary Protocol，而 memcache 不支持，
+意味着 memcached 会有更高的性能。不过，还需要注意的是，memcached 目前还不支持长连接。
+
+
+
+什么是CAS协议
+ Memcached于1.2.4版本新增CAS(Check and Set)协议类同于Java并发的CAS(Compare and Swap)原子操作，处理同一item被多个线程更改过程的并发问题。
+ 如原来MEMCACHED中的KES的内容为A，客户端C1和客户端C2都把A取了出来，C1往准备往其中加B，C2准备往其中加C，这就会造成C1和C2执行后的CACHE KEYS要么是AB要么是AC，而不会出现我们期望的ABC。这种情况，如果不是在集群环境中，而只是单机服务器，可以通过在写CACHE KEYS时增加同步锁，就可以解决问题，可是在集群环境中，同步锁是显然解决不了问题的。
+ 所有的被发送到memcached的单个命令是完全原子的。如果您针对同一份数据同时发送了一个set命令和一个get命令，它们不会影响对方。它们将被串行化、先后执行。即使在多线程模式，所有的命令都是原子的；命令序列不是原子的。如果您通过get命令获取了一个item，修改了它，然后想把它set回memcached，我们不保证这个item没有被其他进程（process，未必是操作系统中的进程）操作过。在并发的情况下，您也可能覆写了一个被其他进程set的item。
+memcached 1.2.5以及更高版本，提供了gets和cas命令，它们可以解决上面的问题。如果您使用gets命令查询某个key的item，memcached会 给您返回该item当前值的唯一标识。如果您覆写了这个item并想把它写回到memcached中，您可以通过cas命令把那个唯一标识一起发送给 memcached。如果该item存放在memcached中的唯一标识与您提供的一致，您的写操作将会成功。如果另一个进程在这期间也修改了这个 item，那么该item存放在memcached中的唯一标识将会改变，您的写操作就会失败。
+1.memcache不支持cas操作，写操作频繁的情况下，很容易造成一份数据被多个调用修改的情况;
+2.memcached扩展使用了libmemcached库提供的api与memcached服务端进行交互;
+3.memcached增加了批量操作，例如Memcached::deleteMultiByKey
+
+.Redis是一个高效key-value的存储系统，
+具备
+1：支持数据的持久化
+2：支持提供多种复杂的数据类型 string list set zset hash 等数据类型的存储
+3:支持数据的备份 既master-slave的数据备份
+
+数据持久化分为 RDB和aof两种数据持久化
+1：RDB持久化是在指定的时间间隔内将内存数据集快照写入到硬盘中  实际操作过程中是forck一个子进程 将内存的数据集写入到临时文件dump中，如果写入成功在替换之前的临时文件 在用二进制压缩，写入到硬盘中
+  RDB 持久化可以在指定的时间间隔内生成数据集的时间点快照
+2：aof持久化是以日志的形式将服务器操作命令的写 删除，操作命令写到aof日志文件中。Redis服务器启动之初会读取该文件来重	新构建数据库，以保证启动后数据库中的数据是完整的。
+  AOF 持久化记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集。
+
+redis主从复制
+		1) 在Slave启动并连接到Master之后，它将主动发送一个SYNC命令。
+		2）此后Master将启动后台存盘进程,同时收集所有接收到的用于修改数据集的命令,在后台进程执行完毕后,Master将		传送整个数据库文件到Slave，以完成一次完全同步。
+		3）而Slave服务器在接收到数据库文件数据之后将其存盘并加载到内存中。
+		4）此后,Master继续将所有已经收集到的修改命令,和新的修改命令依次传送给Slaves,Slave将在依次执行这些数据		修改命令,从而达到最终的数据同步。
+特点
+	1) 同一个Master可以同步多个Slaves。
+	2) Slave同样可以接受其它Slaves的连接和同步请求，这样可以有效的分载Master的同步压力。因此我们可以将Redis的Replica		tion架构视为图结构。
+	3) Master Server是以非阻塞的方式为Slaves提供服务。所以在Master-Slave同步期间，客户端仍然可以提交查询或修改请求。
+	4) SlaveServer同样是以非阻塞的方式完成数据同步。在同步期间，如果有客户端提交查询请求，Redis则返回同步之前的数据。
+	5) 为了分载Master的读操作压力，Slave服务器可以为客户端提供只读操作的服务，写服务仍然必须由Master来完成。即便如 		,系统的伸缩性还是得到了很大的提高。
+	6) Master可以将数据保存操作交给Slaves完成，从而避免了在Master中要有独立的进程来完成此操作。
+
+nginx本身不能处理php,nginx是一个web服务器,当web服务器接收到请求之后,如果是php,则交给php解释处理器处理, 返回给nginx web服务器 ,web服务器再将结果返回给客户端
+nginx接收到php请求之后,将请求发给fastcgi管理进程处理,fascgi管理进程选择cgi子进程处理结果并返回被nginx
+Nginx仅仅是作为Nginx，Proxy反向代理使用的，因为这个反向代理功能表现的效果是负载均衡集群的效果，所以本文称之为Nginx负载均衡。
+PHP-FPM是一个PHP FastCGI管理器，是只用于PHP的
+PHP-FPM提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置，比spawn-fcgi具有更多优点
+
+ttserver:
+		tokyocabinet :一个 key-value的DBM 数据库，但是没有提供网络接口
+						Tokyo Cabinet 是一个 DBM的实现。这里的数据库由一系列 key-value
+						对的记录构成。key 和 value都可以是任意长度的字节序列,既可以是二
+						进制也可以是字符 串。这里没有数据类型和数据表的概念。 当做为Hash
+						表数据库使用时，每个 key必须是不同的,因此无法存储两个 key相同的值。
+		tokyotyrant :是为 TC 写的网络接口，他支持 memcache协议，也可以通过 HTTP 操作，以下称 TT
+		
+Keepalived 的作用是检测web服务器的状态
+如果有一台web服务器死机，或工作出现故障，Keepalived将检测到，并将有故障的web服务器从系统中剔除，
+当web服务器工作正常后Keepalived自动将web服务器加入到服务器群中，这些工作全部自动完成，
+不需要人工干涉，需要人工做的只是修复故障的 web服务器。
+haproxy：HAProxy 是一款提供高可用性、负载均衡以及基于TCP（第四层）和HTTP（第七层）应用的代理软件，支持
+        虚拟主机，它是免费、快速并且可靠的一种解决方案。 HAProxy特别适用于那些负载特大的web站点。
+	 	 通过Haproxy代理后端的Web server群集，如果需要与数据库交互，有Web server与Database建立连接

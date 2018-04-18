@@ -1,0 +1,11 @@
+##局部收集数据概率
+chance: 
+  - {controller: default, action: default, chance: 10000}
+
+##数据存放目录
+data_dir: /data/logs/xhprof
+
+##收集数据指定时间
+date:
+  start: "2009-09-10 00:00:00"
+  end: "2012-09-10 23:59:59"

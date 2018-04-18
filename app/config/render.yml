@@ -1,0 +1,18 @@
+template_path:
+  layout: "templates/layout/"
+  template: "templates/"
+
+layout:
+  enable: false
+  default: ''
+  
+controller:
+  key: controller
+  default_name: default
+  
+action:
+  key: action
+  default_name: default
+  
+component:
+  key: component

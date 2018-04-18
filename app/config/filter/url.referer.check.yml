@@ -1,0 +1,14 @@
+#当前站点的配置
+CurrentSite: 
+  #需要检查referer访问的url(非必填) path: /controller/action或者正则表达式, is_regex: 是否为正则表达式
+  LimitUrl:
+    #- {path: /default/default, is_regex: false}
+    #- /a/b
+#以下白名单只作用于  上面设定的路径
+Access:
+  #当有referer时，需填写白名单域名(非必填)
+  RefererDomainWhileList:
+    #- aa.com
+    #- x.aa.com
+  #!特殊设定!  true表示：没有referer也行，false表示：必需要有referer(必填)
+  AllowNoneRerere: true

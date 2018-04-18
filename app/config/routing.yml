@@ -1,0 +1,22 @@
+#article_by_type:
+#  url:    /article/list/:type
+#  param:  { controller: article, action: list }
+#  requirements: { type: \d+ }
+
+# default rules
+homepage:
+  url:   /
+  param: { controller: default, action: default }
+
+default_index:
+  url:   /:controller
+  param: { action: default }
+
+components:
+  url:   /:component/:controller/:action
+  requirements:
+    component: vote|lottery|fileupload|videoupload|exchange|invite|commonupload|itil
+    controller: vote|lottery|fileupload|videoupload|exchange|invite|commonupload|itil
+
+default:
+  url:   /:controller/:action/*
