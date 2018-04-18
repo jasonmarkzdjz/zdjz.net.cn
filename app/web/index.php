@@ -3,7 +3,7 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../') . '/');
 #在提交代码到svn之前，将4行注释去掉，，6行加上注释
 strtoupper(substr(PHP_OS,0,3))==='WIN' ?
     define('FRAMEWORK_PATH', ROOT_PATH.'../service/framework/'):
-define('FRAMEWORK_PATH','/www/web/service/framework/');
+define('FRAMEWORK_PATH','/www/web/zdjz.service.net/framework/');
 define('CACHE_PATH', ROOT_PATH.'cache/');
 set_include_path(get_include_path() . PATH_SEPARATOR. FRAMEWORK_PATH);
 define('BASE_CHARSET','UTF-8');
