@@ -13,9 +13,9 @@ slave:
       password: root
     # 11211 走代理缓存服务器 根据key 通过hash算法(crc(32)/服务器数量)哈系算法算出哈系到不同的服务器上 服务器也是通过hash算法之映射到元上
     #1978端口 通过memcache协议链接Tokyo Cabinet非惯性数据库
-memcache:
+memcached:
   enable: true
-  server: [{host: "127.0.0.1", port: 11211}]
+  server: [{host: "127.0.0.1", port: 1978}]
   persistent: false
 mq:
   httpsqs: {host: "127.0.0.1", port: 1218}

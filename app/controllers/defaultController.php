@@ -8,16 +8,15 @@
  */
 class defaultController extends TMController{
     public function defaultAction(){
-        echo "ddddddddddd";
-//        $mem = TMMemCacheMgr::getInstance();
-//
-//        $votes= $mem->increment('vote_201818_'.'930');
-//        echo $mem->get('vote_201818_'.'930').'<br>';
+        $mem = TMMemdCacheMgr::getInstance();
 
-//        $redis = RedisOtherService::getInstance();
-//        $redis->cset('ages',2,300);
-//        $age = $redis->get('ages');
-//        print_r($age);
+        $votes= $mem->increment('age');
+        echo $votes;
+
+        $redis = RedisOtherService::getInstance();
+        $redis->cset('ages',2,300);
+        $age = $redis->get('ages');
+        print_r($age);
 //
 //        $MQClient = TMMQClient::getInstance();
 //        $result = $MQClient->publishMessage(json_encode(array('id'=>rand(1,10000))), TMConfig::get('tams_id').'project_votes');

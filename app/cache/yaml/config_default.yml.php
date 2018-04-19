@@ -21,7 +21,7 @@ return array (
     'username' => 'root',
     'password' => 'root',
   ),
-  'memcache' => 
+  'memcached' => 
   array (
     'enable' => true,
     'server' => 
@@ -29,7 +29,7 @@ return array (
       0 => 
       array (
         'host' => '127.0.0.1',
-        'port' => 11211,
+        'port' => 1978,
       ),
     ),
     'persistent' => false,
