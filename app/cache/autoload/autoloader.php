@@ -116,6 +116,7 @@ return array (
   'TMBrowserCache' => '/www/web/zdjz.service.net/framework/cache/TMBrowserCache.class.php',
   'TMCacheInterface' => '/www/web/zdjz.service.net/framework/cache/TMCacheInterface.class.php',
   'TMFileCache' => '/www/web/zdjz.service.net/framework/cache/TMFileCache.class.php',
+  'TMMemCacheMgr' => '/www/web/zdjz.service.net/framework/cache/TMMemCacheMgr.class.php',
   'TMConfigDispatcher' => '/www/web/zdjz.service.net/framework/config/TMConfigDispatcher.class.php',
   'TMEnvConfig' => '/www/web/zdjz.service.net/framework/config/TMEnvConfig.class.php',
   'TMBasicConfigHandle' => '/www/web/zdjz.service.net/framework/config/TMBasicConfigHandle.class.php',
